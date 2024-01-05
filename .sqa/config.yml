@@ -1,0 +1,42 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/pytest-dev/pytest-bdd:
+      branch: master
+      repo: https://github.com/pytest-dev/pytest-bdd
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/pytest-dev/pytest-bdd git:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-alizarin-dhole.sh
+        container: qc.acc_messy-tan-deer
+  QC.Doc:
+    repos:
+      github.com/pytest-dev/pytest-bdd find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.pasty-olive-bison.sh
+        container: qc.doc_stinky-purple-quetzal
+      github.com/pytest-dev/pytest-bdd git:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-gold-grasshopper.sh
+        container: qc.doc_woolly-lemon-leopard
+  QC.Lic:
+    repos:
+      github.com/pytest-dev/pytest-bdd licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.homely-violet-goat.sh
+        container: qc.lic_cheeky-dandelion-sponge
+  QC.Ver:
+    repos:
+      github.com/pytest-dev/pytest-bdd get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-mauve-collie.sh
+        container: qc.ver_foggy-turquoise-cattle
+timeout: 5400
